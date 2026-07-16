@@ -7,8 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  // private baseUrl = 'http://localhost:8080/api/users';
-  private baseUrl = 'https://sj-bank-backend-93e1d47260fe.herokuapp.com/api/users';
+  private baseUrl = '/api/users';
 
   constructor(private http: HttpClient) { }
 

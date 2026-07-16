@@ -3,6 +3,7 @@ package com.ShahirJalal.backend.service;
 import com.ShahirJalal.backend.model.User;
 import com.ShahirJalal.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,13 +13,16 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -39,7 +43,9 @@ public class UserService {
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
             existingUser.setUsername(newUser.getUsername());
-            existingUser.setPassword(newUser.getPassword());
+            if (newUser.getPassword() != null && !newUser.getPassword().isBlank()) {
+                existingUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            }
             existingUser.setRole(newUser.getRole());
             existingUser.setAccountNumber(newUser.getAccountNumber());
             existingUser.setInitialBalance(newUser.getInitialBalance());
@@ -58,11 +64,25 @@ public class UserService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            if (user.getPassword().equals(password)) {
+            if (passwordMatches(user.getPassword(), password)) {
+                if (!isBcryptHash(user.getPassword())) {
+                    user.setPassword(passwordEncoder.encode(password));
+                    userRepository.save(user);
+                }
                 return Optional.of(user);
             }
         }
 
         return Optional.empty();
+    }
+
+    private boolean passwordMatches(String storedPassword, String rawPassword) {
+        return isBcryptHash(storedPassword)
+                ? passwordEncoder.matches(rawPassword, storedPassword)
+                : storedPassword.equals(rawPassword);
+    }
+
+    private boolean isBcryptHash(String password) {
+        return password != null && password.startsWith("$2");
     }
 }

@@ -1,0 +1,8 @@
+# Local environment and tooling
+.env
+.idea/
+*.iml
+
+# Local verification logs
+**/local-*.log
+**/local-*-error.log
