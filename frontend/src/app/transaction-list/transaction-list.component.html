@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="transaction-list">
+  <h2>Transaction List</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Sender</th>
+      <th>Recipient</th>
+      <th>Sender Account Number</th>
+      <th>Recipient Account Number</th>
+      <th>Reference</th>
+      <th>Transaction Type</th>
+      <th>Amount</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{ transaction.id }}</td>
+      <td>{{ transaction.sender }}</td>
+      <td>{{ transaction.recipient }}</td>
+      <td>{{ transaction.senderAccountNumber }}</td>
+      <td>{{ transaction.recipientAccountNumber }}</td>
+      <td>{{ transaction.reference }}</td>
+      <td>{{ transaction.transactionType }}</td>
+      <td [ngClass]="{ 'green-text': transaction.transactionType === 'receive' || transaction.transactionType === 'deposit', 'red-text': transaction.transactionType === 'withdraw' || transaction.transactionType === 'transfer' }">{{ transaction.amount }}</td>
+      <td>{{ transaction.timestamp }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

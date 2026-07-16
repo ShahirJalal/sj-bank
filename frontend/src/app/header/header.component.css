@@ -1,0 +1,41 @@
+header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.home {
+  color: white;
+  text-decoration: none;
+}
+
+.logo {
+  max-height: 34px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+button:hover {
+  background-color: #ff1a1a;
+}

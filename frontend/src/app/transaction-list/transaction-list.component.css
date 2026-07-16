@@ -1,0 +1,26 @@
+.transaction-list {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.green-text {
+  color: green;
+}
+
+.red-text {
+  color: red;
+}

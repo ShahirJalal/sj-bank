@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="transfer-container">
+  <h2>Transfer Fund</h2>
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="amount">Amount:</label>
+      <input id="amount" formControlName="amount" type="number"/>
+      <div *ngIf="transferForm.get('amount')?.invalid && transferForm.get('amount')?.touched">
+        <small *ngIf="transferForm.get('amount')?.hasError('required')" class="error">Amount is required</small>
+        <small *ngIf="transferForm.get('amount')?.hasError('min')" class="error">Amount must be greater than 0</small>
+        <small *ngIf="transferForm.get('amount')?.hasError('insufficientFunds')" class="error">Insufficient funds</small>
+      </div>
+    </div>
+    <div>
+      <label for="recipientAccountNumber">Recipient Account Number:</label>
+      <input id="recipientAccountNumber" formControlName="recipientAccountNumber" type="text"/>
+      <div *ngIf="transferForm.get('recipientAccountNumber')?.invalid && transferForm.get('recipientAccountNumber')?.touched">
+        <small *ngIf="transferForm.get('recipientAccountNumber')?.hasError('required')" class="error">Recipient Account Number is required</small>
+      </div>
+    </div>
+    <div>
+      <label for="reference">Reference:</label>
+      <input id="reference" formControlName="reference" type="text"/>
+    </div>
+    <button type="submit">Transfer</button>
+  </form>
+</div>
