@@ -1,6 +1,20 @@
 # SJ Bank
 
-Full-stack banking application deployed as one Docker Compose stack.
+Full-stack banking application deployed as one Docker Compose stack. Live at [bank.shahirjalal.com](https://bank.shahirjalal.com).
+
+## Features
+
+- User registration and login
+- View account balance
+- Deposit, withdraw, and transfer funds
+- View transaction history
+
+## Tech Stack
+
+- **Frontend:** Angular 16, PrimeNG
+- **Backend:** Spring Boot 3.3, Java 17
+- **Database:** PostgreSQL 16
+- **Deployment:** Docker Compose, Nginx, Cloudflare Tunnel, Jenkins
 
 ## Architecture
 
